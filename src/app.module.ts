@@ -3,8 +3,8 @@ import { ConfigModule } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
-import { TopicsModule } from "./topics/topics.module";
-import { Topics } from "./topics/topics.entity";
+import { LessonsModule } from "./lessons/lessons.module";
+import { Lessons } from "./lessons/lessons.entity";
 
 @Module({
     imports: [
@@ -16,10 +16,10 @@ import { Topics } from "./topics/topics.entity";
             username: process.env.DATABASE_USER,
             password: process.env.DATABASE_PASSWORD,
             database: "english_mastery",
-            entities: [Topics],
+            entities: [Lessons],
             synchronize: true,
         }),
-        TopicsModule,
+        LessonsModule,
     ],
     controllers: [AppController],
     providers: [AppService],
