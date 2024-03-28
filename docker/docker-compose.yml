@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  english-mastery-db:
+    image: postgres
+    container_name: english-mastery-db
+    ports:
+      - '54321:5432'
+    environment:
+      POSTGRES_DB: english_mastery
+      POSTGRES_USER: kadonomaro
+      POSTGRES_PASSWORD: 123456789
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:
