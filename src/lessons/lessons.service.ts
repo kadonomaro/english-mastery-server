@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Lessons } from "./lessons.entity";
+import { LessonsDto } from "./lessons.dto";
 
 @Injectable()
 export class LessonsService {
@@ -14,8 +15,12 @@ export class LessonsService {
         return await this.lessonsRepository.find();
     }
 
-    async create({ name, level }): Promise<Lessons> {
-        const lesson = this.lessonsRepository.create({ name, level });
+    async getOne(id: string): Promise<Lessons> {
+        return this.lessonsRepository.findOneBy({ id });
+    }
+
+    async create(dto: LessonsDto): Promise<Lessons> {
+        const lesson = this.lessonsRepository.create(dto);
         return this.lessonsRepository.save(lesson);
     }
 

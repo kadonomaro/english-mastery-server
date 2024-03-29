@@ -5,6 +5,8 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { LessonsModule } from "./lessons/lessons.module";
 import { Lessons } from "./lessons/lessons.entity";
+import { Words } from "./words/words.entity";
+import { WordsModule } from "./words/words.module";
 
 @Module({
     imports: [
@@ -16,10 +18,11 @@ import { Lessons } from "./lessons/lessons.entity";
             username: process.env.DATABASE_USER,
             password: process.env.DATABASE_PASSWORD,
             database: "english_mastery",
-            entities: [Lessons],
+            entities: [Lessons, Words],
             synchronize: true,
         }),
         LessonsModule,
+        WordsModule,
     ],
     controllers: [AppController],
     providers: [AppService],

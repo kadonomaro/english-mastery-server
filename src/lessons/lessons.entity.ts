@@ -10,4 +10,7 @@ export class Lessons {
 
     @Column()
     level: string;
+
+    // @ManyToMany(() => Words, (words) => words.lessons)
+    // words: Words[];
 }
