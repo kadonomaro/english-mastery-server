@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Delete, Body, Param } from "@nestjs/common";
+import { Controller, Get, Post, Delete, Body, Param, Put } from "@nestjs/common";
 import { LessonsService } from "./lessons.service";
 import { LessonsDto } from "./lessons.dto";
 
@@ -19,6 +19,11 @@ export class LessonsController {
     @Post()
     create(@Body() dto: LessonsDto) {
         return this.lessonsService.create(dto);
+    }
+
+    @Put(":id")
+    update(@Param("id") id: string, @Body() dto: LessonsDto) {
+        return this.lessonsService.update(id, dto);
     }
 
     @Delete(":id")

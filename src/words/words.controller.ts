@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Delete, Body, Param } from "@nestjs/common";
+import { Controller, Get, Post, Put, Delete, Body, Param, Query } from "@nestjs/common";
 import { WordsService } from "./words.service";
 import { WordsDto } from "./words.dto";
 
@@ -7,8 +7,8 @@ export class WordsController {
     constructor(private readonly wordsService: WordsService) {}
 
     @Get()
-    getAll() {
-        return this.wordsService.getAll();
+    getAll(@Query("lessonId") lessonId: string) {
+        return this.wordsService.getAll(lessonId);
     }
 
     @Get(":id")
@@ -19,6 +19,11 @@ export class WordsController {
     @Post()
     create(@Body() dto: WordsDto) {
         return this.wordsService.create(dto);
+    }
+
+    @Put(":id")
+    update(@Param("id") id: string, @Body() dto: WordsDto) {
+        return this.wordsService.update(id, dto);
     }
 
     @Delete(":id")

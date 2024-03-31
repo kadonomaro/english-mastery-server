@@ -24,6 +24,14 @@ export class LessonsService {
         return this.lessonsRepository.save(lesson);
     }
 
+    async update(id: string, dto: LessonsDto): Promise<Lessons> {
+        const lesson = await this.lessonsRepository.findOneBy({ id });
+        lesson.name = dto.name;
+        lesson.level = dto.level;
+
+        return this.lessonsRepository.save(lesson);
+    }
+
     async remove(id: string): Promise<void> {
         await this.lessonsRepository.delete(id);
     }
