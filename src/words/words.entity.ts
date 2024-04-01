@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    CreateDateColumn,
+    UpdateDateColumn,
+} from "typeorm";
 
 @Entity()
 export class Words {
@@ -11,15 +17,19 @@ export class Words {
     @Column()
     translate: string;
 
-    @Column({ name: "lesson_id", default: "" })
+    @Column({ default: "" })
     lessonId: string;
 
-    @Column({ name: "is_completed", default: false })
+    @Column({ default: false })
     isCompleted: boolean;
 
-    // @ManyToMany(() => Lessons, (lessons) => lessons.words, {
-    //     cascade: true,
-    // })
-    // @JoinTable()
-    // lessons: Lessons[];
+    @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
+    createdAt: Date;
+
+    @UpdateDateColumn({
+        type: "timestamp",
+        default: () => "CURRENT_TIMESTAMP(6)",
+        onUpdate: "CURRENT_TIMESTAMP(6)",
+    })
+    updatedAt: Date;
 }
