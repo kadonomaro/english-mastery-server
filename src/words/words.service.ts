@@ -8,34 +8,34 @@ import { WordsDto } from "./words.dto";
 export class WordsService {
     constructor(
         @InjectRepository(Words)
-        private readonly wordsRepository: Repository<Words>,
+        private readonly repository: Repository<Words>,
     ) {}
 
-    async getAll(lessonId: string): Promise<Words[]> {
-        const words = await this.wordsRepository.findBy({ lessonId });
+    async findAll(lessonId: string): Promise<Words[]> {
+        const words = await this.repository.findBy({ lessonId });
         if (words.length === 0) throw new NotFoundException("Words not found");
         return words;
     }
 
-    async getOne(id: string): Promise<Words> {
-        return this.wordsRepository.findOneBy({ id });
+    async findOne(id: string): Promise<Words> {
+        return this.repository.findOneBy({ id });
     }
 
     async create(dto: WordsDto): Promise<Words> {
-        const word = this.wordsRepository.create(dto);
-        return this.wordsRepository.save(word);
+        const word = this.repository.create(dto);
+        return this.repository.save(word);
     }
 
     async update(id: string, dto: WordsDto): Promise<Words> {
-        const word = await this.wordsRepository.findOneBy({ id });
+        const word = await this.repository.findOneBy({ id });
         word.name = dto.name;
         word.translate = dto.translate;
         word.lessonId = dto.lessonId;
 
-        return this.wordsRepository.save(word);
+        return this.repository.save(word);
     }
 
     async remove(id: string): Promise<void> {
-        await this.wordsRepository.delete(id);
+        await this.repository.delete(id);
     }
 }

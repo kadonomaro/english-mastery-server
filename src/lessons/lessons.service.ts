@@ -8,31 +8,31 @@ import { LessonsDto } from "./lessons.dto";
 export class LessonsService {
     constructor(
         @InjectRepository(Lessons)
-        private readonly lessonsRepository: Repository<Lessons>,
+        private readonly repository: Repository<Lessons>,
     ) {}
 
-    async getAll(): Promise<Lessons[]> {
-        return await this.lessonsRepository.find();
+    async findAll(): Promise<Lessons[]> {
+        return await this.repository.find();
     }
 
-    async getOne(id: string): Promise<Lessons> {
-        return this.lessonsRepository.findOneBy({ id });
+    async findOne(id: string): Promise<Lessons> {
+        return this.repository.findOneBy({ id });
     }
 
     async create(dto: LessonsDto): Promise<Lessons> {
-        const lesson = this.lessonsRepository.create(dto);
-        return this.lessonsRepository.save(lesson);
+        const lesson = this.repository.create(dto);
+        return this.repository.save(lesson);
     }
 
     async update(id: string, dto: LessonsDto): Promise<Lessons> {
-        const lesson = await this.lessonsRepository.findOneBy({ id });
+        const lesson = await this.repository.findOneBy({ id });
         lesson.name = dto.name;
         lesson.level = dto.level;
 
-        return this.lessonsRepository.save(lesson);
+        return this.repository.save(lesson);
     }
 
     async remove(id: string): Promise<void> {
-        await this.lessonsRepository.delete(id);
+        await this.repository.delete(id);
     }
 }

@@ -7,13 +7,13 @@ export class WordsController {
     constructor(private readonly wordsService: WordsService) {}
 
     @Get()
-    getAll(@Query("lessonId") lessonId: string) {
-        return this.wordsService.getAll(lessonId);
+    findAll(@Query("lessonId") lessonId: string) {
+        return this.wordsService.findAll(lessonId);
     }
 
     @Get(":id")
-    getOne(@Param("id") id: string) {
-        return this.wordsService.getOne(id);
+    findOne(@Param("id") id: string) {
+        return this.wordsService.findOne(id);
     }
 
     @Post()

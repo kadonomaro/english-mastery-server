@@ -7,13 +7,13 @@ export class LessonsController {
     constructor(private readonly lessonsService: LessonsService) {}
 
     @Get()
-    getAll() {
-        return this.lessonsService.getAll();
+    findAll() {
+        return this.lessonsService.findAll();
     }
 
     @Get(":id")
-    getOne(@Param("id") id: string) {
-        return this.lessonsService.getOne(id);
+    findOne(@Param("id") id: string) {
+        return this.lessonsService.findOne(id);
     }
 
     @Post()
